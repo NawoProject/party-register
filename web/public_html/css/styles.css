@@ -1,0 +1,56 @@
+@charset "utf-8";
+html {
+  min-width: 100%;
+  min-height: 100%;
+}
+body{
+	margin: 0;
+	font-family: 'Dosis', arial, sans-serif;
+  padding-bottom: 0;
+	padding-top: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+  background-color: white;
+  min-width: 100%;
+  min-height: 100%;
+}
+.bigcont{
+  max-width: 1080px;
+  padding-top: 4px;
+  padding-bottom: 10px;
+  padding-left: 2px;
+  padding-right: 2px;
+  left: 0;
+  right: 0;
+}
+.fcont{
+  max-width: 1080px;
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.bigcent{
+  width: 100%;
+  display: block;
+}
+.navbar-brand2{
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  vertical-align: -webkit-baseline-middle;
+}
+.xbold{
+  font-weight: bold;
+}
+.wheight{
+  height: 50px;
+}
+.bpad{
+  padding-bottom: 45px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.break-word {
+  word-wrap: break-word;
+}
