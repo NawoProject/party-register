@@ -30,7 +30,7 @@ class na_users{
    }
 
    //Function adds new user. cleans name first though
-   function add_new_member($fname, $mname, $sname, $bmonth, $byear, $sauce, $ward, $lga, $state){
+   function add_new_member($fname, $mname, $sname, $bmonth, $byear, $sauce, $ward, $lga, $state, $email, $number){
     
         //clean vars
         $clean = new na_clean;
@@ -43,7 +43,9 @@ class na_users{
         $ward = $clean->clean_str($ward);
         $lga = $clean->clean_str($lga);
         $state = $clean->clean_str($state);
+        $number = $clean->clean_str($number);
 
+        
         //encrypt data
         $enc = new na_security;
         $efname = $enc->enc_value($fname);
@@ -51,10 +53,14 @@ class na_users{
         $esname = $enc->enc_value($sname);
         $ebmonth = $enc->enc_value($bmonth);
         $ebyear = $enc->enc_value($byear);
+        $eemail = $enc->enc_value($email);
+        $enumber = $enc->enc_value($number);
 
         //get user hash id
         $userid = $enc->gen_user_hash($fname, $mname, $sname, $bmonth, $byear, $sauce);
         $simple = $enc->gen_simple_hash($fname, $mname, $sname, $bmonth, $byear);
+        $hemail = hash("sha512", "$sname$email");
+        $hnumber = hash("sha512", "$sname$number");
 
         //get timestamp
         $cur_date = $clean->new_time();
@@ -110,8 +116,33 @@ class na_users{
                 $ret = FALSE;
                 return $ret;
                 exit();
-           }             
-           return $ret;
+           }
+           
+           //insert encrypted contact information
+           $collection3 = $client->$x->na_contacts; //Select collection
+
+           $document3 = array(
+            "user_hash" => "$userid",
+            "entry_date" => $cur_date,
+            "enc_email" => "$eemail",
+            "hash_email" => "$hemail",
+            "enc_number" => "$enumber",
+            "hash_number" => "$hnumber"     
+            );
+       
+             try  {
+                $insertOneResult3 = $collection3->insertOne($document3);
+                if ($insertOneResult3->getInsertedCount() == 1) {
+                  $ret3 = $insertOneResult3->getInsertedId();
+                  }
+              } catch(\Exception $e){
+                   $f = "Failed to add user for some reason. Try again";
+                  $ret = FALSE;
+                  return $ret;
+                  exit();
+             }
+
+           return $userid;
    } //end function
 
 
