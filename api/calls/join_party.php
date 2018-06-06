@@ -21,7 +21,7 @@ $authentication = TRUE;
  //error counter
  $error_counter = 0;
 
- $exp = array("first_name", "surname", "birth_month", "birth_year", "sauce", "ward", "lga", "state");
+ $exp = array("first_name", "surname", "birth_month", "birth_year", "sauce", "ward", "lga", "state", "email", "number");
  foreach ($exp as $value) {
    if (empty($data->$value)){
      $error_counter = $error_counter +1;
@@ -42,6 +42,8 @@ $sauce = $data->sauce;
 $ward = $data->ward;
 $lga = $data->lga;
 $state = $data->state;
+$email = $data->email;
+$number = $data->number;
 
 $clean = new na_clean;
 $fname = $clean->clean_str($fname);
@@ -51,10 +53,11 @@ $sauce = $clean->clean_str($sauce);
 $ward = $clean->clean_str($ward);
 $lga = $clean->clean_str($lga);
 $state = $clean->clean_str($state);
+$number = $clean->clean_str($number);
 
 //Insert in database
 $join = new na_users;
-$result = $join->add_new_member($fname, $mname, $sname, $bmonth, $byear, $sauce, $ward, $lga, $state);
+$result = $join->add_new_member($fname, $mname, $sname, $bmonth, $byear, $sauce, $ward, $lga, $state, $email, $number);
 
 if($result!=FALSE){
 header('Status: 200 OK');

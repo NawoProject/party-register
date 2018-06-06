@@ -86,6 +86,11 @@ $states = $fcall->get_states();
         <div class="alert alert-warning" role="alert">
         Do not forget secret as it will not be saved anywhere and cannot be retrieved if lost.
         </div>
+        <br /><br />
+
+        Contact details:  <input form="join-party" class="form-control" type="email" id="email" name="email" placeholder="E-Mail Addresss"></input> 
+        <input form="join-party" class="form-control" type="number" id="number" name="number" placeholder="Mobile Number"></input><br /> <br/>
+        
         <br />
 
         <div id="ferror"></div><br />

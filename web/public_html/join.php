@@ -15,6 +15,8 @@ $lga = $_POST["lga"];
 $ward = $_POST["wards"];
 $sauce = $_POST["sauce"];
 $sauce2 = $_POST["sauce2"];
+$email = $_POST["email"];
+$number = $_POST["number"];
 
 if($sauce!=$sauce2){
     echo "Secret not valid";
@@ -33,12 +35,12 @@ $data = array(
     "state" => $state,
     "lga" => $lga,
     "ward" => $ward,
-    "sauce" => $sauce
+    "sauce" => $sauce,
+    "email" => $email,
+    "number" => $number
 );
 $data = json_encode($data);
 $join = $fcall->join_party($data);
-$oid = (array)$join;
-$oid = $oid['$oid'];
 
 
 //custom page info
