@@ -17,11 +17,11 @@ $authentication = TRUE;
   $data = json_decode($_POST['data']);
  }
 
- // check if required arguments sent, extract and clean, except event_orgs array
+ // check if required arguments sent, extract and clean
  //error counter
  $error_counter = 0;
 
- $exp = array("first_name", "surname", "birth_month", "birth_year", "sauce", "ward", "lga", "state", "email", "number");
+ $exp = array("first_name", "surname", "birth_month", "birth_year", "sauce", "ward", "lga", "state");
  foreach ($exp as $value) {
    if (empty($data->$value)){
      $error_counter = $error_counter +1;
@@ -34,7 +34,11 @@ $authentication = TRUE;
 
 //get arguments
 $fname = $data->first_name;
-$mname = $data->middle_name;
+if(!isset($data->middle_name)){
+  $mname = "";
+} else {
+  $mname = $data->middle_name;
+}
 $sname = $data->surname;
 $bmonth = $data->birth_month;
 $byear = $data->birth_year;
@@ -42,8 +46,18 @@ $sauce = $data->sauce;
 $ward = $data->ward;
 $lga = $data->lga;
 $state = $data->state;
-$email = $data->email;
-$number = $data->number;
+
+if(!isset($data->email)){
+  $email = "";
+} else {
+  $email = $data->email;
+}
+
+if(!isset($data->number)){
+  $number = "";
+} else {
+  $number = $data->number;
+}
 
 $clean = new na_clean;
 $fname = $clean->clean_str($fname);

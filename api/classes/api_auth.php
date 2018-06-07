@@ -116,9 +116,16 @@ class api_auth {
       $x = $this->db_name;
       $collection = $client->$x->na_publicdb;
       $result = $collection->createIndex(['user_hash' => 1]);
-      return $result;
-    } //end class
 
-}
+      $collection = $client->$x->na_contacts;
+      $result = $collection->createIndex(['user_hash' => 1]);
+      
+      $collection = $client->$x->na_register;
+      $result = $collection->createIndex(['simple_id' => 1]);
+  
+      return $result;
+    } //end function
+
+} // end class
 
  ?>
