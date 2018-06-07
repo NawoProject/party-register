@@ -103,7 +103,7 @@ class na_users{
           "lga" => "$lga",
           "state" => "$state",
           "payment_status" => "pending",
-          "block_hash" => "NULL"          
+          "block_hash" => "NULL"         
           );
      
            try  {
@@ -252,7 +252,10 @@ class na_users{
         'block_hash' => "NULL",
       ],
       [
-        'sort' => ['entry_date' => +1],
+        'sort' => [
+          'entry_date' => +1,
+          'user_hash' => +1
+        ],
         'limit' => 100,
       ]
       );
@@ -276,7 +279,7 @@ class na_users{
         
       ],
       [
-        'sort' => ['entry_date' => -1],
+        'sort' => ['entry_date' => -1, 'user_hash' => -1],
         'limit' => 100,
       ]
       );
